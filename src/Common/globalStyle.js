@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Lexend Deca', sans-serif;
-    background-color: #E5E5E5;
+    background-color: #FFFFFF;
   }
 `;
 
