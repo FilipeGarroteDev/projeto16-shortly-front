@@ -4,7 +4,7 @@ export default function Topbar({ children }) {
 	return <TopbarWrapper>{children}</TopbarWrapper>;
 }
 
-const TopbarWrapper = styled.header`
+const TopbarWrapper = styled.nav`
 	background-color: #ffffff;
 	width: 100vw;
 	height: 85px;

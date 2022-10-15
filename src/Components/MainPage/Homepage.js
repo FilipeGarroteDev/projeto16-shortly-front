@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+import Logo from '../../Common/Logo.js';
 import Topbar from '../../Common/Topbar.js';
-import logo from '../../images/logo.png';
 
 export default function Homepage() {
 	return (
@@ -12,10 +12,7 @@ export default function Homepage() {
 				</div>
 			</Topbar>
 			<Wrapper>
-				<div>
-					<h1>Shortly</h1>
-					<img src={logo} alt="logo" />
-				</div>
+				<Logo />
 				<div>
 					<ion-icon name="trophy-sharp"></ion-icon>
 					<h2>Ranking</h2>
@@ -59,16 +56,6 @@ const Wrapper = styled.main`
 		color: #ffd233;
 	}
 
-	h1 {
-		font-size: 41px;
-		font-weight: 200;
-	}
-
-	img {
-		width: 64px;
-		height: 64px;
-	}
-
 	h2 {
 		font-size: 23px;
 		font-weight: 700;
@@ -88,7 +75,7 @@ const Ranking = styled.section`
 	padding: 20px 40px;
 	border-top-left-radius: 25px;
 	border-top-right-radius: 25px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 20px rgba(120, 177, 89, 0.25);
 	margin-bottom: 54px;
 
 	span {
