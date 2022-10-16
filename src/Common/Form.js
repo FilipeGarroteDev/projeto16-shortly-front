@@ -34,5 +34,6 @@ const FormStyle = styled.form`
 		border-radius: 12px;
 		color: #ffffff;
 		font-weight: 700;
+		margin-top: 40px;
 	}
 `;
