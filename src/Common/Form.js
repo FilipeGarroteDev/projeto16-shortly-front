@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export default function Form({ type, children }) {
-	const buttonSubject = (type = 'signup' ? 'Criar Conta' : 'Entrar');
+export default function Form({ type, children, ...otherProps }) {
+	const buttonSubject = type === 'signup' ? 'Criar Conta' : 'Entrar';
 
 	return (
-		<FormStyle>
+		<FormStyle {...otherProps}>
 			{children}
 			<button>{buttonSubject}</button>
 		</FormStyle>
