@@ -6,12 +6,7 @@ import Topbar from '../../Common/Topbar';
 export default function SignIn() {
 	return (
 		<>
-			<Topbar>
-				<div>
-					<h3>Entrar</h3>
-					<h3>Cadastrar-se</h3>
-				</div>
-			</Topbar>
+			<Topbar/>
 			<Wrapper>
 				<Logo />
 				<Form type="signin">
