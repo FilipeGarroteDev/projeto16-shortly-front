@@ -21,7 +21,7 @@ const FormStyle = styled.form`
 	input {
 		width: 100%;
 		padding: 21px;
-		border: 1px solid #78b159;
+		border: 1px solid #78b15940;
 		border-radius: 15px;
 		box-shadow: 0 4px 24px rgba(120, 177, 89, 0.25);
 	}
