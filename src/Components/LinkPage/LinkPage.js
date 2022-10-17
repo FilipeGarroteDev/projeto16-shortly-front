@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../Common/Logo';
 import Topbar from '../../Common/Topbar';
+import Link from './Link';
 
 export default function LinkPage() {
 	const navigate = useNavigate();
@@ -68,7 +69,7 @@ export default function LinkPage() {
 				<Logo />
 				<form onSubmit={shortenUrl}>
 					<input
-						type="url"
+						type="text"
 						name="url"
 						placeholder="Links que cabem no bolso"
 						onChange={handleForm}
@@ -88,25 +89,9 @@ export default function LinkPage() {
 	);
 }
 
-function Link({ shortUrl, url, visitCount }) {
-	return (
-		<LinkStyle>
-			<div>
-				<span>{url}</span>
-				<span>{shortUrl}</span>
-				<span>Quantidade de visitantes: {visitCount}</span>
-			</div>
-			<div>
-				<ion-icon name="trash-sharp"></ion-icon>
-			</div>
-		</LinkStyle>
-	);
-}
-
 const Wrapper = styled.main`
 	height: 100%;
 	width: 100%;
-	padding-top: 85px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -117,7 +102,8 @@ const Wrapper = styled.main`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 50px;
+		margin-bottom: 40px;
+		margin-top: 60px;
 
 		input {
 			width: 75%;
@@ -138,37 +124,5 @@ const Wrapper = styled.main`
 			font-weight: 700;
 			font-size: 12px;
 		}
-	}
-`;
-
-const LinkStyle = styled.article`
-	display: flex;
-	width: 60%;
-	box-shadow: 0 4px 24px rgba(120, 177, 89, 0.25);
-	border-radius: 12px;
-	border: 1px solid #78b15940;
-	overflow: hidden;
-	margin-bottom: 20px;
-
-	div:nth-of-type(1) {
-		width: 87%;
-		height: 40px;
-		background-color: #80cc74;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 21px;
-		color: #ffffff;
-		font-size: 12px;
-	}
-
-	div:nth-of-type(2) {
-		width: 13%;
-		background-color: #ffffff;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: #ea4f4f;
-		font-size: 24px;
 	}
 `;

@@ -16,10 +16,12 @@ const FormStyle = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-top: 60px;
 	gap: 20px;
 
 	input {
 		width: 100%;
+		height: 45px;
 		padding: 21px;
 		border: 1px solid #78b15940;
 		border-radius: 15px;
@@ -28,7 +30,7 @@ const FormStyle = styled.form`
 
 	button {
 		width: 180px;
-		height: 60px;
+		height: 50px;
 		background-color: #5d9040;
 		border: none;
 		border-radius: 12px;

@@ -58,7 +58,6 @@ export default function SignIn() {
 const Wrapper = styled.main`
 	height: 100%;
 	width: 100%;
-	padding-top: 85px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

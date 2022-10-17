@@ -30,9 +30,6 @@ const TopbarWrapper = styled.nav`
 	background-color: #ffffff;
 	width: 100vw;
 	height: 85px;
-	position: fixed;
-	top: 0;
-	right: 0;
 	padding: 0 20% 0 20%;
 	display: flex;
 	align-items: center;
