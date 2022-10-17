@@ -21,7 +21,10 @@ export default function Signup() {
 	async function submitForm(e) {
 		e.preventDefault();
 		try {
-			await axios.post('http://localhost:4000/signup', signupData);
+			await axios.post(
+				'https://filipegarrote-shortly-back.herokuapp.com/signup',
+				signupData
+			);
 			alert('Usuário criado com sucesso');
 			navigate('/signin');
 		} catch (error) {

@@ -23,7 +23,7 @@ export default function LinkPage() {
 			const config = { headers: { Authorization: `Bearer ${token}` } };
 			try {
 				const userHistoric = await axios.get(
-					'http://localhost:4000/users/me',
+					'https://filipegarrote-shortly-back.herokuapp.com/users/me',
 					config
 				);
 				setLinksList(userHistoric.data.shortenedUrls);
@@ -48,7 +48,7 @@ export default function LinkPage() {
 		try {
 			const config = { headers: { Authorization: `Bearer ${token}` } };
 			const shortUrl = await axios.post(
-				'http://localhost:4000/urls/shorten',
+				'https://filipegarrote-shortly-back.herokuapp.com/urls/shorten',
 				newUrl,
 				config
 			);

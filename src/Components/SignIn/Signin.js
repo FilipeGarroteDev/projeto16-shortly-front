@@ -21,7 +21,7 @@ export default function SignIn() {
 		e.preventDefault();
 		try {
 			const loggedIn = await axios.post(
-				'http://localhost:4000/signin',
+				'https://filipegarrote-shortly-back.herokuapp.com/signin',
 				signinData
 			);
 			localStorage.setItem('token', loggedIn.data.token);

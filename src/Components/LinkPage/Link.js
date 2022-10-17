@@ -19,11 +19,14 @@ export default function Link({
 			if (!window.confirm('Você tem certeza que deseja excluir esse site?')) {
 				return;
 			}
-			await axios.delete(`http://localhost:4000/urls/${id}`, config);
+			await axios.delete(
+				`https://filipegarrote-shortly-back.herokuapp.com/urls/${id}`,
+				config
+			);
 			setIsDeleted(true);
 			setTimeout(async () => {
 				const userHistoric = await axios.get(
-					'http://localhost:4000/users/me',
+					'https://filipegarrote-shortly-back.herokuapp.com/users/me',
 					config
 				);
 				setLinksList(userHistoric.data.shortenedUrls);
@@ -33,17 +36,19 @@ export default function Link({
 		}
 	}
 
-	// async function goToLink() {
-	// 	try {
-	// 		await axios.get(`http://localhost:4000/urls/open/${shortUrl}`);
-	// 	} catch (error) {
-
-	// 	}
-	// }
+	async function goToLink() {
+		try {
+			await axios.get(
+				`https://filipegarrote-shortly-back.herokuapp.com/urls/open/${shortUrl}`
+			);
+		} catch (error) {
+			console.log('deu não');
+		}
+	}
 
 	return (
 		<LinkStyle isDeleted={isDeleted}>
-			<div>
+			<div onClick={goToLink}>
 				<span>{url}</span>
 				<span>{shortUrl}</span>
 				<span>Quantidade de visitantes: {visitCount}</span>

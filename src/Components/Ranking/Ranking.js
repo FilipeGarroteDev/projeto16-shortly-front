@@ -13,7 +13,9 @@ export default function RankingPage() {
 		setToken(localStorage.getItem('token'));
 		async function fetchData() {
 			try {
-				const rank = await axios.get('http://localhost:4000/ranking');
+				const rank = await axios.get(
+					'https://filipegarrote-shortly-back.herokuapp.com/ranking'
+				);
 				setTopTen(rank.data);
 			} catch (error) {
 				alert(error.response.data);
