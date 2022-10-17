@@ -35,26 +35,15 @@ export default function Link({
 		}
 	}
 
-	// async function goToLink() {
-	// 	try {
-	// 		await axios.get(
-	// 			`https://filipegarrote-shortly-back.herokuapp.com/urls/open/${shortUrl}`
-	// 		);
-	// 	} catch (error) {
-	// 		console.log(error.message);
-	// 		window.open(url);
-	// 		window.location.reload();
-	// 	}
-	// }
-
 	return (
 		<LinkStyle isDeleted={isDeleted}>
 			<div
-				onClick={() =>
+				onClick={() => {
 					window.open(
-						`https://filipegarrote-shortly-back.herokuapp.com/urls/${shortUrl}`
-					)
-				}
+						`https://filipegarrote-shortly-back.herokuapp.com/urls/open/${shortUrl}`
+					);
+					window.location.reload();
+				}}
 			>
 				<span>{url}</span>
 				<span>{shortUrl}</span>
