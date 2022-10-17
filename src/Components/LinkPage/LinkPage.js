@@ -1,35 +1,64 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../Common/Logo';
 import Topbar from '../../Common/Topbar';
 
 export default function LinkPage() {
+	const navigate = useNavigate();
+	const token = localStorage.getItem('token');
+	const [linksList, setLinksList] = useState([]);
+
+	useEffect(() => {
+		if (!token) {
+			alert('Você não está logado.\nPor gentileza, refaça o login.');
+			navigate('/');
+		}
+		async function fetchData() {
+			try {
+				const config = { headers: { Authorization: `Bearer ${token}` } };
+				const userHistoric = await axios.get(
+					'http://localhost:4000/users/me',
+					config
+				);
+				setLinksList(userHistoric.data.shortenedUrls);
+			} catch (error) {
+				alert(error.response.data);
+			}
+		}
+		fetchData();
+	}, []);
+
 	return (
 		<>
-			<Topbar/>
+			<Topbar />
 			<Wrapper>
 				<Logo />
 				<form>
 					<input type="url" name="url" placeholder="Links que cabem no bolso" />
 					<button>Encurtar link</button>
 				</form>
-				<Link />
-				<Link />
-				<Link />
-				<Link />
-				<Link />
-				<Link />
+				{linksList.map(({ id, shortUrl, url, visitCount }) => (
+					<Link
+						key={id}
+						shortUrl={shortUrl}
+						url={url}
+						visitCount={visitCount}
+					/>
+				))}
 			</Wrapper>
 		</>
 	);
 }
 
-function Link() {
+function Link({ shortUrl, url, visitCount }) {
 	return (
 		<LinkStyle>
 			<div>
-				<span>https://google.com.br</span>
-				<span>e43215Af</span>
-				<span>Quantidade de visitantes: 271</span>
+				<span>{url}</span>
+				<span>{shortUrl}</span>
+				<span>Quantidade de visitantes: {visitCount}</span>
 			</div>
 			<div>
 				<ion-icon name="trash-sharp"></ion-icon>

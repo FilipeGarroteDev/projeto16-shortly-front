@@ -1,17 +1,54 @@
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Form from '../../Common/Form';
 import Logo from '../../Common/Logo';
 import Topbar from '../../Common/Topbar';
 
 export default function SignIn() {
+	const [signinData, setSigninData] = useState({});
+	const navigate = useNavigate();
+
+	function handleForm(e) {
+		setSigninData({
+			...signinData,
+			[e.target.name]: e.target.value,
+		});
+	}
+
+	async function submitForm(e) {
+		e.preventDefault();
+		try {
+			const loggedIn = await axios.post(
+				'http://localhost:4000/signin',
+				signinData
+			);
+			localStorage.setItem('token', loggedIn.data.token);
+			navigate('/mylinks');
+		} catch (error) {
+			alert(error.response.data);
+		}
+	}
+
 	return (
 		<>
-			<Topbar/>
+			<Topbar />
 			<Wrapper>
 				<Logo />
-				<Form type="signin">
-					<input type="email" name="email" placeholder="E-mail" />
-					<input type="password" name="password" placeholder="Senha" />
+				<Form type="signin" onSubmit={submitForm}>
+					<input
+						type="email"
+						name="email"
+						placeholder="E-mail"
+						onChange={handleForm}
+					/>
+					<input
+						type="password"
+						name="password"
+						placeholder="Senha"
+						onChange={handleForm}
+					/>
 				</Form>
 			</Wrapper>
 		</>
