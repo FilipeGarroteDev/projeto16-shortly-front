@@ -74,6 +74,11 @@ const TopbarWrapper = styled.nav`
 		font-size: 12px;
 		font-weight: 400;
 		color: #9c9c9c;
+
+		&:hover {
+			cursor: pointer;
+			filter: brightness(0.7);
+		}
 	}
 
 	h4:nth-of-type(1) {

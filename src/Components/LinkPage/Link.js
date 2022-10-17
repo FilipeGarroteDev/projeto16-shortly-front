@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useState } from 'react';
 import { redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,6 +12,7 @@ export default function Link({
 	setLinksList,
 }) {
 	const config = { headers: { Authorization: `Bearer ${token}` } };
+	const [isDeleted, setIsDeleted] = useState(false);
 
 	async function deleteLink() {
 		try {
@@ -18,11 +20,14 @@ export default function Link({
 				return;
 			}
 			await axios.delete(`http://localhost:4000/urls/${id}`, config);
-			const userHistoric = await axios.get(
-				'http://localhost:4000/users/me',
-				config
-			);
-			setLinksList(userHistoric.data.shortenedUrls);
+			setIsDeleted(true);
+			setTimeout(async () => {
+				const userHistoric = await axios.get(
+					'http://localhost:4000/users/me',
+					config
+				);
+				setLinksList(userHistoric.data.shortenedUrls);
+			}, 500);
 		} catch (error) {
 			alert(error.response.data);
 		}
@@ -37,7 +42,7 @@ export default function Link({
 	// }
 
 	return (
-		<LinkStyle>
+		<LinkStyle isDeleted={isDeleted}>
 			<div>
 				<span>{url}</span>
 				<span>{shortUrl}</span>
@@ -59,6 +64,8 @@ const LinkStyle = styled.article`
 	border: 1px solid #78b15940;
 	overflow: hidden;
 	margin-bottom: 20px;
+	opacity: ${(props) => (props.isDeleted ? '0' : '1')};
+	transition: all 0.5s;
 
 	div:nth-of-type(1) {
 		width: 87%;
@@ -81,5 +88,10 @@ const LinkStyle = styled.article`
 		justify-content: center;
 		color: #ea4f4f;
 		font-size: 24px;
+
+		&:hover {
+			cursor: pointer;
+			background-color: #ffe1e1;
+		}
 	}
 `;

@@ -12,7 +12,7 @@ export default function Form({ type, children, ...otherProps }) {
 }
 
 const FormStyle = styled.form`
-	width: 60%;
+	width: 50%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -37,5 +37,11 @@ const FormStyle = styled.form`
 		color: #ffffff;
 		font-weight: 700;
 		margin-top: 40px;
+
+		&:hover {
+			transform: scale(1.04);
+			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+			cursor: pointer;
+		}
 	}
 `;

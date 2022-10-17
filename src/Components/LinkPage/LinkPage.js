@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import EmptyData from '../../Common/EmptyData';
 import Logo from '../../Common/Logo';
 import Topbar from '../../Common/Topbar';
 import Link from './Link';
@@ -79,19 +80,25 @@ export default function LinkPage() {
 					/>
 					<button>Encurtar link</button>
 				</form>
-				{!linksList
-					? 'LOADING...'
-					: linksList.map(({ id, shortUrl, url, visitCount }) => (
-							<Link
-								key={id}
-								id={id}
-								shortUrl={shortUrl}
-								token={token}
-								url={url}
-								visitCount={visitCount}
-								setLinksList={setLinksList}
-							/>
-					  ))}
+				{linksList.length === 0 ? (
+					<EmptyData>
+						<h3>Você ainda não criou seus links</h3>
+						<h3>Aproveite e crie já o seu, inserindo a url no campo acima</h3>
+						<ion-icon name="happy-outline"></ion-icon>
+					</EmptyData>
+				) : (
+					linksList.map(({ id, shortUrl, url, visitCount }) => (
+						<Link
+							key={id}
+							id={id}
+							shortUrl={shortUrl}
+							token={token}
+							url={url}
+							visitCount={visitCount}
+							setLinksList={setLinksList}
+						/>
+					))
+				)}
 			</Wrapper>
 		</>
 	);
@@ -131,6 +138,12 @@ const Wrapper = styled.main`
 			color: #ffffff;
 			font-weight: 700;
 			font-size: 12px;
+
+			&:hover {
+				transform: scale(1.04);
+				box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+				cursor: pointer;
+			}
 		}
 	}
 `;
