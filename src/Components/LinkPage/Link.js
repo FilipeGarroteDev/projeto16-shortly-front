@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Link({
@@ -41,8 +40,10 @@ export default function Link({
 			await axios.get(
 				`https://filipegarrote-shortly-back.herokuapp.com/urls/open/${shortUrl}`
 			);
+			window.open(url, '_self');
+			window.location.reload();
 		} catch (error) {
-			console.log('deu não');
+			console.log(error.response.data);
 		}
 	}
 

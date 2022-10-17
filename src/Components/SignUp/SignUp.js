@@ -15,7 +15,6 @@ export default function Signup() {
 			...signupData,
 			[e.target.name]: e.target.value,
 		});
-		console.log(signupData);
 	}
 
 	async function submitForm(e) {
@@ -28,7 +27,6 @@ export default function Signup() {
 			alert('Usuário criado com sucesso');
 			navigate('/signin');
 		} catch (error) {
-			console.log(error);
 			alert(error.response.data);
 		}
 	}
