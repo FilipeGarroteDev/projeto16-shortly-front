@@ -39,7 +39,6 @@ export default function Link({
 		<LinkStyle isDeleted={isDeleted}>
 			<div
 				onClick={() => {
-					alert(shortUrl);
 					window.open(
 						`https://filipegarrote-shortly-back.herokuapp.com/urls/open/${shortUrl}`
 					);
