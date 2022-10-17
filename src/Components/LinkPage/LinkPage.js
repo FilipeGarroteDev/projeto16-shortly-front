@@ -9,6 +9,7 @@ export default function LinkPage() {
 	const navigate = useNavigate();
 	const token = localStorage.getItem('token');
 	const [linksList, setLinksList] = useState([]);
+	const [newUrl, setNewUrl] = useState('');
 
 	useEffect(() => {
 		if (!token) {
@@ -16,8 +17,8 @@ export default function LinkPage() {
 			navigate('/');
 		}
 		async function fetchData() {
+			const config = { headers: { Authorization: `Bearer ${token}` } };
 			try {
-				const config = { headers: { Authorization: `Bearer ${token}` } };
 				const userHistoric = await axios.get(
 					'http://localhost:4000/users/me',
 					config
@@ -25,18 +26,53 @@ export default function LinkPage() {
 				setLinksList(userHistoric.data.shortenedUrls);
 			} catch (error) {
 				alert(error.response.data);
+				navigate('/');
 			}
 		}
 		fetchData();
-	}, []);
+	}, [navigate, token]);
+
+	function handleForm(e) {
+		setNewUrl({
+			url: e.target.value,
+		});
+	}
+
+	async function shortenUrl(e) {
+		e.preventDefault();
+		try {
+			const config = { headers: { Authorization: `Bearer ${token}` } };
+			const shortUrl = await axios.post(
+				'http://localhost:4000/urls/shorten',
+				newUrl,
+				config
+			);
+			setLinksList([
+				...linksList,
+				{
+					id: Date.now(),
+					url: newUrl.url,
+					shortUrl: shortUrl.data.shortUrl,
+					visitCount: 0,
+				},
+			]);
+		} catch (error) {
+			alert(error.response.data);
+		}
+	}
 
 	return (
 		<>
 			<Topbar />
 			<Wrapper>
 				<Logo />
-				<form>
-					<input type="url" name="url" placeholder="Links que cabem no bolso" />
+				<form onSubmit={shortenUrl}>
+					<input
+						type="url"
+						name="url"
+						placeholder="Links que cabem no bolso"
+						onChange={handleForm}
+					/>
 					<button>Encurtar link</button>
 				</form>
 				{linksList.map(({ id, shortUrl, url, visitCount }) => (
