@@ -79,9 +79,12 @@ export default function LinkPage() {
 				{linksList.map(({ id, shortUrl, url, visitCount }) => (
 					<Link
 						key={id}
+						id={id}
 						shortUrl={shortUrl}
+						token={token}
 						url={url}
 						visitCount={visitCount}
+						setLinksList={setLinksList}
 					/>
 				))}
 			</Wrapper>
