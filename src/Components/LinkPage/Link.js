@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Link({
@@ -9,8 +10,9 @@ export default function Link({
 	token,
 	setLinksList,
 }) {
+	const config = { headers: { Authorization: `Bearer ${token}` } };
+
 	async function deleteLink() {
-		const config = { headers: { Authorization: `Bearer ${token}` } };
 		try {
 			if (!window.confirm('Você tem certeza que deseja excluir esse site?')) {
 				return;
@@ -25,6 +27,14 @@ export default function Link({
 			alert(error.response.data);
 		}
 	}
+
+	// async function goToLink() {
+	// 	try {
+	// 		await axios.get(`http://localhost:4000/urls/open/${shortUrl}`);
+	// 	} catch (error) {
+
+	// 	}
+	// }
 
 	return (
 		<LinkStyle>

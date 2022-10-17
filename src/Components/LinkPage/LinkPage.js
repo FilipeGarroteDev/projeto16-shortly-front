@@ -76,17 +76,19 @@ export default function LinkPage() {
 					/>
 					<button>Encurtar link</button>
 				</form>
-				{linksList.map(({ id, shortUrl, url, visitCount }) => (
-					<Link
-						key={id}
-						id={id}
-						shortUrl={shortUrl}
-						token={token}
-						url={url}
-						visitCount={visitCount}
-						setLinksList={setLinksList}
-					/>
-				))}
+				{!linksList
+					? 'LOADING...'
+					: linksList.map(({ id, shortUrl, url, visitCount }) => (
+							<Link
+								key={id}
+								id={id}
+								shortUrl={shortUrl}
+								token={token}
+								url={url}
+								visitCount={visitCount}
+								setLinksList={setLinksList}
+							/>
+					  ))}
 			</Wrapper>
 		</>
 	);

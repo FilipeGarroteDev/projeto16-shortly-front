@@ -1,11 +1,27 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Logo from '../../Common/Logo.js';
 import Topbar from '../../Common/Topbar.js';
 
 export default function Homepage() {
+	const [topTen, setTopTen] = useState([]);
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const rank = await axios.get('http://localhost:4000/ranking');
+				setTopTen(rank.data);
+			} catch (error) {
+				alert(error.response.data);
+			}
+		}
+		fetchData();
+	}, []);
+
 	return (
 		<>
-			<Topbar/>
+			<Topbar />
 			<Wrapper>
 				<Logo />
 				<div>
@@ -13,16 +29,14 @@ export default function Homepage() {
 					<h2>Ranking</h2>
 				</div>
 				<Ranking>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
-					<span>Robson - 32 links - 1.703.584 visualizações</span>
+					{topTen.map(({ id, name, linksCount, visitCount }, index) => (
+						<span key={id}>
+							<strong>
+								{index + 1}. {name} -
+							</strong>{' '}
+							{linksCount} links - {visitCount} visualizações
+						</span>
+					))}
 				</Ranking>
 				<p>Crie sua conta para usar nosso serviço!</p>
 			</Wrapper>
