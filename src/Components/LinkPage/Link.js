@@ -35,21 +35,27 @@ export default function Link({
 		}
 	}
 
-	async function goToLink() {
-		try {
-			await axios.get(
-				`https://filipegarrote-shortly-back.herokuapp.com/urls/open/${shortUrl}`
-			);
-		} catch (error) {
-			console.log(error.message);
-			window.open(url);
-			window.location.reload();
-		}
-	}
+	// async function goToLink() {
+	// 	try {
+	// 		await axios.get(
+	// 			`https://filipegarrote-shortly-back.herokuapp.com/urls/open/${shortUrl}`
+	// 		);
+	// 	} catch (error) {
+	// 		console.log(error.message);
+	// 		window.open(url);
+	// 		window.location.reload();
+	// 	}
+	// }
 
 	return (
 		<LinkStyle isDeleted={isDeleted}>
-			<div onClick={goToLink}>
+			<div
+				onClick={() =>
+					window.open(
+						`https://filipegarrote-shortly-back.herokuapp.com/urls/${shortUrl}`
+					)
+				}
+			>
 				<span>{url}</span>
 				<span>{shortUrl}</span>
 				<span>Quantidade de visitantes: {visitCount}</span>
@@ -83,6 +89,11 @@ const LinkStyle = styled.article`
 		padding: 21px;
 		color: #ffffff;
 		font-size: 12px;
+
+		&:hover {
+			cursor: pointer;
+			filter: brightness(0.85);
+		}
 	}
 
 	div:nth-of-type(2) {
