@@ -42,7 +42,7 @@ export default function Link({
 			);
 		} catch (error) {
 			console.log(error.message);
-			window.open(url, '_self');
+			window.open(url);
 			window.location.reload();
 		}
 	}
