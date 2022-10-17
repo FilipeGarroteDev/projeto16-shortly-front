@@ -1,7 +1,19 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Topbar({ page }) {
-	const isLogged = true;
+	const navigate = useNavigate();
+	const [token, setToken] = useState('');
+	const [isLogged, setIsLogged] = useState(false);
+
+	useEffect(() => {
+		if (token) {
+			setIsLogged(true);
+		} else {
+			setToken(localStorage.getItem('token'));
+		}
+	}, [token, setToken]);
 
 	return (
 		<TopbarWrapper isLogged={isLogged} page={page}>
@@ -11,15 +23,23 @@ export default function Topbar({ page }) {
 						<h3>Seja bem-vindo(a), Pessoa!</h3>
 					</div>
 					<div>
-						<h4>Home</h4>
-						<h4>Ranking</h4>
-						<h4>Sair</h4>
+						<h4 onClick={() => navigate('/mylinks')}>Home</h4>
+						<h4 onClick={() => navigate('/')}>Ranking</h4>
+						<h4
+							onClick={() => {
+								localStorage.clear();
+								setIsLogged(false);
+								navigate('/');
+							}}
+						>
+							Sair
+						</h4>
 					</div>
 				</>
 			) : (
 				<div>
-					<h4>Entrar</h4>
-					<h4>Cadastrar-se</h4>
+					<h4 onClick={() => navigate('/signin')}>Entrar</h4>
+					<h4 onClick={() => navigate('/signup')}>Cadastrar-se</h4>
 				</div>
 			)}
 		</TopbarWrapper>

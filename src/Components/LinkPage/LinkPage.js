@@ -16,6 +16,7 @@ export default function LinkPage() {
 		if (!token) {
 			alert('Você não está logado.\nPor gentileza, refaça o login.');
 			navigate('/');
+			return;
 		}
 		async function fetchData() {
 			const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -27,6 +28,7 @@ export default function LinkPage() {
 				setLinksList(userHistoric.data.shortenedUrls);
 			} catch (error) {
 				alert(error.response.data);
+				localStorage.clear();
 				navigate('/');
 			}
 		}
