@@ -26,6 +26,7 @@ export default function LinkPage() {
 					config
 				);
 				setLinksList(userHistoric.data.shortenedUrls);
+				localStorage.setItem('username', userHistoric.data.name);
 			} catch (error) {
 				alert(error.response.data);
 				localStorage.clear();
@@ -66,7 +67,7 @@ export default function LinkPage() {
 
 	return (
 		<>
-			<Topbar />
+			<Topbar page="mylinks" />
 			<Wrapper>
 				<Logo />
 				<form onSubmit={shortenUrl}>

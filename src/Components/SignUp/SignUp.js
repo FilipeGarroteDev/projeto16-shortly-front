@@ -32,7 +32,7 @@ export default function Signup() {
 
 	return (
 		<>
-			<Topbar />
+			<Topbar page="signup" />
 			<Wrapper>
 				<Logo />
 				<Form type="signup" onSubmit={submitForm}>

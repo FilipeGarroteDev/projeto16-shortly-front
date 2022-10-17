@@ -33,7 +33,7 @@ export default function SignIn() {
 
 	return (
 		<>
-			<Topbar />
+			<Topbar page="signin" />
 			<Wrapper>
 				<Logo />
 				<Form type="signin" onSubmit={submitForm}>

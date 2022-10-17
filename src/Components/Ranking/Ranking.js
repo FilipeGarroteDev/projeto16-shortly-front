@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import Logo from '../../Common/Logo.js';
 import Topbar from '../../Common/Topbar.js';
 
-export default function Homepage() {
+export default function RankingPage() {
 	const [topTen, setTopTen] = useState([]);
+	const [token, setToken] = useState('');
 
 	useEffect(() => {
+		setToken(localStorage.getItem('token'));
 		async function fetchData() {
 			try {
 				const rank = await axios.get('http://localhost:4000/ranking');
@@ -21,7 +23,7 @@ export default function Homepage() {
 
 	return (
 		<>
-			<Topbar />
+			<Topbar page="ranking" />
 			<Wrapper>
 				<Logo />
 				<div>
@@ -38,7 +40,7 @@ export default function Homepage() {
 						</span>
 					))}
 				</Ranking>
-				<p>Crie sua conta para usar nosso serviço!</p>
+				{token ? '' : <p>Crie sua conta para usar nosso serviço!</p>}
 			</Wrapper>
 		</>
 	);
