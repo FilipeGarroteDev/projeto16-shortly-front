@@ -47,20 +47,16 @@ export default function LinkPage() {
 		e.preventDefault();
 		try {
 			const config = { headers: { Authorization: `Bearer ${token}` } };
-			const shortUrl = await axios.post(
+			await axios.post(
 				'https://filipegarrote-shortly-back.herokuapp.com/urls/shorten',
 				newUrl,
 				config
 			);
-			setLinksList([
-				...linksList,
-				{
-					id: Date.now(),
-					url: newUrl.url,
-					shortUrl: shortUrl.data.shortUrl,
-					visitCount: 0,
-				},
-			]);
+			const userHistoric = await axios.get(
+				'https://filipegarrote-shortly-back.herokuapp.com/users/me',
+				config
+			);
+			setLinksList(userHistoric.data.shortenedUrls);
 		} catch (error) {
 			alert(error.response.data);
 		}
